@@ -15,11 +15,13 @@ export function Posts() {
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedPost, setSelectedPost] = useState(null);
 
-  // 3. data에 useQuery를 구조분해할당 , (쿼리 키, 비동기 함수)
+  // 3. data에 useQuery를 구조분해할당 , (쿼리 키, 비동기 함수, 옵션)
   // isLoading: 데이터가 로딩 중인지의 여부를 알려줌
   // isError:   데이터를 가져올 때, 오류가 있는지의 여부를 알려줌
   // error:     오류를 표시할 수 있다.
-  const { data, isError, error, isLoading } = useQuery("posts", fetchPosts);
+  const { data, isError, error, isLoading } = useQuery("posts", fetchPosts, {
+    staleTime: 2000,
+  });
   if (isLoading) return <h3>Loading...</h3>;
   if (isError)
     return (
